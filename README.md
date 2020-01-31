@@ -46,28 +46,32 @@ the moment of inertia, and finally tau is the resulting moment. All variables ar
 vectors unless explicitly stated otherwise.
 
 #### 3. `Roll Pitch Control`
-Please refer to function QuadControl::RollPitchControl in L124 – L172 in QuadControl.cpp. Math behind the scene is:
+Please refer to function QuadControl::RollPitchControl in L124 – L172 in QuadControl.cpp. 
+Math :-
 
 ![RollPitchControl](./3.PNG)
 
 Where Fthrust is the total thrust and m is the mass of the drone (scalar). a_c is the commanded acceleration. Kp is the control gain parameter. R is the rotation matrix w.r.t. the current attitude of the drone, and b is the last column vector of R (that is, bx = R13, by = R23, bz = R33). pc and qc are the commanded body rate around x-axis and y-axis (scalars), which will be fed to body rate control.
 
 #### 4. `Altitude Control`
-Please refer to function QuadControl::AltitudeControl in L174 – L220 in QuadControl.cpp. Math behind the scene is:
+Please refer to function QuadControl::AltitudeControl in L174 – L220 in QuadControl.cpp.
+Math behind the scene is:
 
 ![AltitudeControl](./4.PNG)
 
 Where z_dot_dot_c is the commanded acceleration along the z-axis in inertial frame, z_c, z, z_dot_c and z_dot is the commanded/actual altitude and commanded/actual velocity along the z axis in inertial frame. z_dot_dot_ff is the feed-forward acceleration and Kp, Kd, Ki are the control gain parameters. All variables in above equations are scalars.
 
 #### 5. `Lateral Position Control`
-Please refer to function QuadControl::LateralPositionControl in L223 – L282 in QuadControl.cpp. Math behind the scene is:
+Please refer to function QuadControl::LateralPositionControl in L223 – L282 in QuadControl.cpp.
+Math:-
 
 ![LateralPositionControl](./5.PNG)
 
 Quite similar with altitude control,x_dot_dot_c is the commanded acceleration along the x-axis and y-axis in inertial frame, p_c, p, p_dot_c and p_dot is the commanded/actual horizonal position and commanded/actual horitonzal velocity in inertial frame. p_dot_dot_ff is the feed-forward acceleration and Kp, Kd are the control gain parameters. Necessary clipping is performed to meet the quad dynamics.
 
 #### 6. `Yaw Control`
-Please refer to function QuadControl::YawControl in L285 – L322 in QuadControl.cpp. Math behind the scene is:
+Please refer to function QuadControl::YawControl in L285 – L322 in QuadControl.cpp.
+Math :-
 
 ![LateralPositionControl](./6.PNG)
 

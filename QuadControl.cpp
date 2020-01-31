@@ -144,14 +144,14 @@ V3F QuadControl::RollPitchControl(V3F accelCmd, Quaternion<float> attitude, floa
 
 	////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
 	if (collThrustCmd > 0) {
-		float accel_thrust = -collThrustCmd / mass;
+		float thrust_acc = -collThrustCmd / mass;
 		// limit the accel command in the x direction.
-		float b_x_cmd = CONSTRAIN(accelCmd.x / accel_thrust, -maxTiltAngle, maxTiltAngle);
+		float b_x_cmd = CONSTRAIN(accelCmd.x / thrust_acc, -maxTiltAngle, maxTiltAngle);
 		float b_x_error = b_x_cmd - R(0, 2);
 		float b_x_ = kpBank * b_x_error;
 
 		// limit the accel command in the y direction.
-		float b_y_cmd = CONSTRAIN(accelCmd.y / accel_thrust, -maxTiltAngle, maxTiltAngle);
+		float b_y_cmd = CONSTRAIN(accelCmd.y / thrust_acc, -maxTiltAngle, maxTiltAngle);
 		float b_y_error = b_y_cmd - R(1, 2);
 		float b_y_ = kpBank * b_y_error;
 
@@ -196,20 +196,20 @@ float QuadControl::AltitudeControl(float posZCmd, float velZCmd, float posZ, flo
 
 	////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
 
-	float z_error = posZCmd - posZ;
-	float pid_p = kpPosZ * z_error;
+	float z_err = posZCmd - posZ;
+	float pid_p = kpPosZ * z_err;
 
 	float z_dot_err = velZCmd - velZ;
 	float pid_d = kpVelZ * z_dot_err + velZ;
 
-	integratedAltitudeError += z_error * dt;
+	integratedAltitudeError += z_err * dt;
 
 	float pid_i = KiPosZ * integratedAltitudeError;
 	float b_z = R(2, 2);
 
-	float u_1_bar = pid_p + pid_d + pid_i + accelZCmd;
+	float u1_bar = pid_p + pid_d + pid_i + accelZCmd;
 
-	float altitude_accel = (u_1_bar - CONST_GRAVITY) / b_z;
+	float altitude_accel = (u1_bar - CONST_GRAVITY) / b_z;
 
 	// constrain value of thrust
 	thrust = -mass * CONSTRAIN(altitude_accel, -maxAscentRate / dt, maxAscentRate / dt);

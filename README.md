@@ -62,14 +62,14 @@ Where z_dot_dot_c is the commanded acceleration along the z-axis in inertial fra
 #### 5. `Lateral Position Control`
 Please refer to function QuadControl::LateralPositionControl in L223 – L282 in QuadControl.cpp. Math behind the scene is:
 
-![LateralPositionControl](./5.JPNG)
+![LateralPositionControl](./5.PNG)
 
 Quite similar with altitude control,x_dot_dot_c is the commanded acceleration along the x-axis and y-axis in inertial frame, p_c, p, p_dot_c and p_dot is the commanded/actual horizonal position and commanded/actual horitonzal velocity in inertial frame. p_dot_dot_ff is the feed-forward acceleration and Kp, Kd are the control gain parameters. Necessary clipping is performed to meet the quad dynamics.
 
 #### 6. `Yaw Control`
 Please refer to function QuadControl::YawControl in L285 – L322 in QuadControl.cpp. Math behind the scene is:
 
-![LateralPositionControl](./6.JPG)
+![LateralPositionControl](./6.PNG)
 
 Where omega_r is the angular velocity around the z-axis in body frame. It is the same as angular velocity of yaw angle (psi_dot) in inertial frame.  psi_c and psi is the commanded yaw angle and actual yaw angle of the drone. Kp is the control gain parameter. All variables above are scalars.
 An optimization is done for performing omega_r control. That is, turning in the opposite direction when |omega_r| > pi. Omega_r = psi_dot  holds because with Euler angles in Yaw-Pitch-Roll order, rotation about yaw is applied last. It is not affected by roll and/or pitch rotation so can be considered separately.

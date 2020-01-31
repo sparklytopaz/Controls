@@ -1,0 +1,4 @@
+﻿  0 File(s) copied
+  QuadControl.cpp
+c:\udacity\flying car\fcnd-controls\fcnd-controls-cpp\src\quadcontrol.cpp(212): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Simulator.vcxproj -> C:\udacity\flying car\FCND-Controls\FCND-Controls-CPP\project\x64\Debug\Simulator.exe

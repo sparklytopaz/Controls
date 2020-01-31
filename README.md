@@ -4,6 +4,7 @@
 Adjusted the mass of drone in `QuadControlParams.txt` Mass = 0.5.
 
 ### Body rate and roll/pitch control (scenario 2) ###
+Refer QuadControl.cpp
 
 #### 1. implement the code in the function `GenerateMotorCommands()` ####
 
